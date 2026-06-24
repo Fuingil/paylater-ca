@@ -20,7 +20,7 @@ export async function sendInquiryNotification(inquiry: InquiryEmail): Promise<vo
   }
 
   const from =
-    process.env.RESEND_FROM_EMAIL ?? "paylater.ca <onboarding@resend.dev>";
+    process.env.RESEND_FROM_EMAIL ?? "paylater.ca <noreply@paylater.ca>";
 
   const resend = new Resend(apiKey);
 
