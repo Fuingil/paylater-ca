@@ -97,6 +97,7 @@ export function ContactForm({ dict, locale, initialCaptcha }: Props) {
             <form
               key={formKey}
               action={formAction}
+              onSubmit={() => setCaptchaOverride(null)}
               className="rounded-3xl border border-border bg-card p-8 backdrop-blur"
             >
               <input type="hidden" name="locale" value={locale} />

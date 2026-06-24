@@ -20,12 +20,11 @@ export async function refreshCaptchaAction(): Promise<CaptchaChallenge> {
 }
 
 export async function submitContactAction(
-  prevState: ContactFormState,
+  _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
   const localeRaw = String(formData.get("locale") ?? "en");
   const locale: Locale = isValidLocale(localeRaw) ? localeRaw : "en";
-  const nextCaptcha = createCaptchaChallenge();
 
   const headerList = await headers();
   const ipAddress =
@@ -47,6 +46,8 @@ export async function submitContactAction(
     ipAddress,
     userAgent: headerList.get("user-agent"),
   });
+
+  const nextCaptcha = createCaptchaChallenge();
 
   if (result.ok) {
     return { success: true, errors: [], captcha: nextCaptcha };
