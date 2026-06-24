@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 
 type Inquiry = {
@@ -33,7 +34,24 @@ export function AdminPanel() {
   }
 
   useEffect(() => {
-    fetchInquiries();
+    let active = true;
+
+    void (async () => {
+      const res = await fetch("/api/admin/inquiries");
+      if (!active) return;
+      if (res.ok) {
+        const data = await res.json();
+        setInquiries(data.inquiries);
+        setAuthenticated(true);
+      } else {
+        setAuthenticated(false);
+      }
+      setLoading(false);
+    })();
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   async function handleLogin(e: FormEvent<HTMLFormElement>) {
@@ -117,12 +135,12 @@ export function AdminPanel() {
             <p className="text-sm text-muted">paylater.ca domain teklifleri</p>
           </div>
           <div className="flex gap-3">
-            <a
+            <Link
               href="/"
               className="rounded-lg border border-border px-4 py-2 text-sm text-muted hover:text-foreground"
             >
               Siteye Dön
-            </a>
+            </Link>
             <button
               type="button"
               onClick={handleLogout}
