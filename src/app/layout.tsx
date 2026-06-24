@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     description: "BNPL ve fintech için ideal Kanada domain'i.",
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
