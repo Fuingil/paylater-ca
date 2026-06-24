@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
 import { db } from "@/lib/db";
 
@@ -6,28 +6,26 @@ const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const MAX_SUBMISSIONS_PER_EMAIL = 3;
 const MAX_SUBMISSIONS_PER_IP = 5;
 
+export type RateLimitReason = "email" | "ip";
+
 export async function checkRateLimit(
   email: string,
   ipAddress: string | null,
-): Promise<string | null> {
+): Promise<RateLimitReason | null> {
   const since = new Date(Date.now() - RATE_LIMIT_WINDOW_MS);
 
   const emailCount = await db.contactInquiry.count({
     where: { email, createdAt: { gte: since } },
   });
 
-  if (emailCount >= MAX_SUBMISSIONS_PER_EMAIL) {
-    return "Bu e-posta adresiyle çok fazla teklif gönderildi. Lütfen daha sonra tekrar deneyin.";
-  }
+  if (emailCount >= MAX_SUBMISSIONS_PER_EMAIL) return "email";
 
   if (ipAddress) {
     const ipCount = await db.contactInquiry.count({
       where: { ipAddress, createdAt: { gte: since } },
     });
 
-    if (ipCount >= MAX_SUBMISSIONS_PER_IP) {
-      return "Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.";
-    }
+    if (ipCount >= MAX_SUBMISSIONS_PER_IP) return "ip";
   }
 
   return null;

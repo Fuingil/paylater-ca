@@ -2,11 +2,20 @@
 
 import { FormEvent, useState } from "react";
 
+import type { Dictionary } from "@/i18n/get-dictionary";
+import type { Locale } from "@/i18n/config";
+
 type FormState = "idle" | "loading" | "success" | "error";
 
-export function ContactForm() {
+type Props = {
+  dict: Dictionary;
+  locale: Locale;
+};
+
+export function ContactForm({ dict, locale }: Props) {
   const [state, setState] = useState<FormState>("idle");
   const [errors, setErrors] = useState<string[]>([]);
+  const t = dict.contact;
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,6 +33,7 @@ export function ContactForm() {
       offerAmount: (formData.get("offerAmount") as string) || undefined,
       message: formData.get("message") as string,
       website: (formData.get("website") as string) || undefined,
+      locale,
     };
 
     try {
@@ -36,7 +46,7 @@ export function ContactForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        setErrors(data.errors ?? [data.message ?? "Bir hata oluştu"]);
+        setErrors(data.errors ?? [data.message ?? t.genericError]);
         setState("error");
         return;
       }
@@ -44,26 +54,23 @@ export function ContactForm() {
       setState("success");
       form.reset();
     } catch {
-      setErrors(["Bağlantı hatası. Lütfen tekrar deneyin."]);
+      setErrors([t.connectionError]);
       setState("error");
     }
   }
 
   return (
-    <section id="iletisim" className="relative py-24">
+    <section id="contact" className="relative py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <span className="text-sm font-semibold uppercase tracking-widest text-accent">
-              İletişim
+              {t.label}
             </span>
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">
-              Teklif Verin
+              {t.title}
             </h2>
-            <p className="mt-4 leading-relaxed text-muted">
-              paylater.ca ile ilgileniyorsanız formu doldurun. En kısa sürede
-              size dönüş yapılacaktır. Ciddi teklifler önceliklidir.
-            </p>
+            <p className="mt-4 leading-relaxed text-muted">{t.subtitle}</p>
 
             <div className="mt-8 space-y-4">
               <div className="flex items-center gap-3 text-sm text-muted">
@@ -71,7 +78,7 @@ export function ContactForm() {
                   ✉️
                 </span>
                 <div>
-                  <div className="font-medium text-foreground">E-posta</div>
+                  <div className="font-medium text-foreground">{t.email}</div>
                   <div>info@paylater.ca</div>
                 </div>
               </div>
@@ -80,7 +87,7 @@ export function ContactForm() {
                   🌐
                 </span>
                 <div>
-                  <div className="font-medium text-foreground">Domain</div>
+                  <div className="font-medium text-foreground">{t.domain}</div>
                   <div>paylater.ca</div>
                 </div>
               </div>
@@ -89,8 +96,8 @@ export function ContactForm() {
                   🔒
                 </span>
                 <div>
-                  <div className="font-medium text-foreground">Transfer</div>
-                  <div>Güvenli escrow ile teslim</div>
+                  <div className="font-medium text-foreground">{t.transfer}</div>
+                  <div>{t.transferValue}</div>
                 </div>
               </div>
             </div>
@@ -103,7 +110,7 @@ export function ContactForm() {
             >
               {state === "success" && (
                 <div className="mb-6 rounded-xl border border-accent/30 bg-accent/10 p-4 text-sm text-accent-light">
-                  ✓ Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.
+                  {t.success}
                 </div>
               )}
 
@@ -122,7 +129,7 @@ export function ContactForm() {
                 </div>
                 <div>
                   <label htmlFor="name" className="mb-1.5 block text-sm font-medium">
-                    Ad Soyad <span className="text-accent">*</span>
+                    {t.name} <span className="text-accent">*</span>
                   </label>
                   <input
                     id="name"
@@ -131,12 +138,12 @@ export function ContactForm() {
                     required
                     minLength={2}
                     className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm outline-none transition focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
-                    placeholder="Adınız Soyadınız"
+                    placeholder={t.namePlaceholder}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="mb-1.5 block text-sm font-medium">
-                    E-posta <span className="text-accent">*</span>
+                    {t.email} <span className="text-accent">*</span>
                   </label>
                   <input
                     id="email"
@@ -144,51 +151,51 @@ export function ContactForm() {
                     type="email"
                     required
                     className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm outline-none transition focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
-                    placeholder="ornek@sirket.com"
+                    placeholder={t.emailPlaceholder}
                   />
                 </div>
                 <div>
                   <label htmlFor="company" className="mb-1.5 block text-sm font-medium">
-                    Şirket
+                    {t.company}
                   </label>
                   <input
                     id="company"
                     name="company"
                     type="text"
                     className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm outline-none transition focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
-                    placeholder="Şirket adı"
+                    placeholder={t.companyPlaceholder}
                   />
                 </div>
                 <div>
                   <label htmlFor="phone" className="mb-1.5 block text-sm font-medium">
-                    Telefon
+                    {t.phone}
                   </label>
                   <input
                     id="phone"
                     name="phone"
                     type="tel"
                     className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm outline-none transition focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder={t.phonePlaceholder}
                   />
                 </div>
               </div>
 
               <div className="mt-5">
                 <label htmlFor="offerAmount" className="mb-1.5 block text-sm font-medium">
-                  Teklif Tutarı (USD/CAD)
+                  {t.offerAmount}
                 </label>
                 <input
                   id="offerAmount"
                   name="offerAmount"
                   type="text"
                   className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm outline-none transition focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
-                  placeholder="ör. $25,000 CAD"
+                  placeholder={t.offerPlaceholder}
                 />
               </div>
 
               <div className="mt-5">
                 <label htmlFor="message" className="mb-1.5 block text-sm font-medium">
-                  Mesajınız <span className="text-accent">*</span>
+                  {t.message} <span className="text-accent">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -197,7 +204,7 @@ export function ContactForm() {
                   minLength={10}
                   rows={4}
                   className="w-full resize-none rounded-xl border border-border bg-background/50 px-4 py-3 text-sm outline-none transition focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
-                  placeholder="Domain ile ilgili teklifiniz veya sorularınız..."
+                  placeholder={t.messagePlaceholder}
                 />
               </div>
 
@@ -206,12 +213,10 @@ export function ContactForm() {
                 disabled={state === "loading"}
                 className="mt-6 w-full rounded-2xl bg-accent py-3.5 text-base font-semibold text-background transition hover:bg-accent-light disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {state === "loading" ? "Gönderiliyor..." : "Teklif Gönder"}
+                {state === "loading" ? t.submitting : t.submit}
               </button>
 
-              <p className="mt-4 text-center text-xs text-muted">
-                Bilgileriniz yalnızca domain satış süreci için kullanılır.
-              </p>
+              <p className="mt-4 text-center text-xs text-muted">{t.privacy}</p>
             </form>
           </div>
         </div>

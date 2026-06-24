@@ -1,0 +1,235 @@
+export const dictionary = {
+  meta: {
+    title: "paylater.ca — Premium Domain For Sale | BNPL & Fintech",
+    description:
+      "paylater.ca premium domain for sale. Canada's .ca extension — the ideal brand domain for Buy Now Pay Later and fintech. Submit your offer.",
+    keywords: [
+      "paylater.ca",
+      "domain for sale",
+      "premium domain",
+      "BNPL",
+      "buy now pay later",
+      "fintech domain",
+      "canada domain",
+      ".ca domain",
+    ],
+    ogTitle: "paylater.ca — Premium Domain For Sale",
+    ogDescription:
+      "The perfect premium domain for Canada's fintech and BNPL sector. Submit your offer today.",
+  },
+  nav: {
+    about: "About",
+    useCases: "Use Cases",
+    buyers: "Who Should Buy",
+    why: "Why This Domain",
+    faq: "FAQ",
+    contact: "Contact",
+    makeOffer: "Make Offer",
+    menu: "Menu",
+  },
+  hero: {
+    badge: "Premium Domain — For Sale",
+    subtitle:
+      "A memorable, SEO-friendly premium domain built for Canada's leading fintech trend — Buy Now, Pay Later (BNPL). Launch your brand today.",
+    cta1: "Submit Offer",
+    cta2: "Explore Use Cases",
+    stats: [
+      { value: ".ca", label: "Canada TLD" },
+      { value: "BNPL", label: "Industry Leader" },
+      { value: "9", label: "Characters" },
+      { value: "∞", label: "Brand Potential" },
+    ],
+  },
+  about: {
+    label: "About the Domain",
+    title: "The Perfect Name for",
+    titleHighlight: "Fintech's Future",
+    p1: 'paylater.ca directly conveys "buy now, pay later" — combining an internationally recognized concept with Canada\'s trusted .ca extension.',
+    p2: "The BNPL market is expected to reach $3 trillion globally by 2030. As Affirm, Klarna, Sezzle and local players grow rapidly in Canada, the right domain name is the foundation of competitive advantage.",
+    features: [
+      { icon: "🎯", title: "Direct Meaning", desc: '"Pay Later" — the universal BNPL industry term' },
+      { icon: "🇨🇦", title: "Canada-Focused", desc: ".ca extension provides local trust and CIRA compliance" },
+      { icon: "📈", title: "SEO Advantage", desc: "Keyword-rich, short and memorable" },
+      { icon: "💎", title: "Premium Quality", desc: "9 characters, no hyphens, no numbers — pure brand value" },
+    ],
+  },
+  useCases: {
+    label: "Use Cases",
+    title: "What Can You Build With This Domain?",
+    subtitle:
+      "paylater.ca can host dozens of different business models in the fintech ecosystem. Here are the strongest scenarios:",
+    items: [
+      {
+        icon: "💳",
+        title: "BNPL Platform",
+        description: "A full-featured Buy Now Pay Later platform offering installment payments at checkout.",
+        tags: ["Fintech", "B2C"],
+      },
+      {
+        icon: "🛒",
+        title: "E-Commerce Integration",
+        description: "SaaS solution adding deferred payment and installment options at online store checkout.",
+        tags: ["E-Commerce", "SaaS"],
+      },
+      {
+        icon: "🏦",
+        title: "Digital Banking",
+        description: "Brand domain for a neobank or digital banking app's BNPL and flexible payment module.",
+        tags: ["Banking", "Neobank"],
+      },
+      {
+        icon: "📱",
+        title: "Mobile Payment App",
+        description: "Consumer fintech app offering 'pay later' via QR, NFC and online payments.",
+        tags: ["Mobile", "Payments"],
+      },
+      {
+        icon: "🏢",
+        title: "B2B Trade Credit",
+        description: "Commercial BNPL solution offering inventory and supply chain financing to SMBs.",
+        tags: ["B2B", "Lending"],
+      },
+      {
+        icon: "🔗",
+        title: "Payment API Gateway",
+        description: "API platform and developer portal providing BNPL integration for developers.",
+        tags: ["API", "Developer"],
+      },
+    ],
+  },
+  buyers: {
+    label: "Target Buyers",
+    title: "Who Should Acquire This Domain?",
+    subtitle:
+      "paylater.ca offers a strategic investment opportunity for companies and ventures with the following profiles.",
+    items: [
+      {
+        icon: "🚀",
+        title: "Fintech Startups",
+        description: "Ready brand identity for seed or Series A BNPL, payments and lending startups.",
+        highlight: "Fast market entry",
+      },
+      {
+        icon: "🏛️",
+        title: "Banks & Lenders",
+        description: "Brand space for traditional banks' digital BNPL products and younger customer segments.",
+        highlight: "Digital transformation",
+      },
+      {
+        icon: "🛍️",
+        title: "E-Commerce Platforms",
+        description: "Payment solution providers offering Shopify, WooCommerce and marketplace integrations.",
+        highlight: "Checkout optimization",
+      },
+      {
+        icon: "💼",
+        title: "Investors & Domain Investors",
+        description: "Strategic domain portfolio investors seeking exposure to fintech sector growth.",
+        highlight: "Value appreciation",
+      },
+      {
+        icon: "🌐",
+        title: "Global Fintech Companies",
+        description: "International BNPL and payment giants entering the Canadian market (Klarna, Affirm, etc.).",
+        highlight: "Canada expansion",
+      },
+      {
+        icon: "⚡",
+        title: "Agencies & Consultancies",
+        description: "Digital agencies and technology consultancies offering fintech solutions to clients.",
+        highlight: "White-label opportunity",
+      },
+    ],
+  },
+  why: {
+    label: "Investment Value",
+    title: "Why",
+    titleDomain: "paylater.ca",
+    titleEnd: "?",
+    subtitle:
+      "Premium domains are like digital real estate — the right name in the right place replaces years of marketing investment. This domain sits at the heart of the BNPL sector.",
+    features: [
+      "Short, memorable and easy to pronounce",
+      "Understood in English and French markets",
+      'Optimized for "pay later canada" Google searches',
+      "Compatible with social media handles (@paylater)",
+      "Trademark-friendly, generic and descriptive",
+      "Ideal URL structure for mobile apps and API documentation",
+    ],
+    stats: [
+      { stat: "$3T+", label: "Projected 2030 BNPL market size" },
+      { stat: "67%", label: "Canadian consumers using BNPL" },
+      { stat: "Top 1%", label: "Fintech domain quality" },
+      { stat: "Instant", label: "Brand recognition and trust" },
+    ],
+  },
+  contact: {
+    label: "Contact",
+    title: "Submit Your Offer",
+    subtitle:
+      "Interested in paylater.ca? Fill out the form below. Serious offers are prioritized and we'll respond promptly.",
+    email: "Email",
+    domain: "Domain",
+    transfer: "Transfer",
+    transferValue: "Secure escrow delivery",
+    name: "Full Name",
+    namePlaceholder: "Your full name",
+    emailPlaceholder: "you@company.com",
+    company: "Company",
+    companyPlaceholder: "Company name",
+    phone: "Phone",
+    phonePlaceholder: "+1 (555) 000-0000",
+    offerAmount: "Offer Amount (USD/CAD)",
+    offerPlaceholder: "e.g. $25,000 CAD",
+    message: "Your Message",
+    messagePlaceholder: "Your offer or questions about the domain...",
+    submit: "Submit Offer",
+    submitting: "Sending...",
+    privacy: "Your information is used only for the domain sale process.",
+    success: "✓ Your message was sent successfully. We'll get back to you shortly.",
+    connectionError: "Connection error. Please try again.",
+    genericError: "An error occurred. Please try again.",
+  },
+  faq: {
+    label: "FAQ",
+    title: "Frequently Asked Questions",
+    items: [
+      {
+        q: "How is the domain transferred?",
+        a: "After agreement, transfer is completed through a secure escrow service (Escrow.com, Dan.com, etc.). Once payment is confirmed, the domain is transferred to your account.",
+      },
+      {
+        q: "Is the price fixed, or is negotiation possible?",
+        a: "We work on an offer basis for serious buyers. Submit your offer through the form or contact us directly.",
+      },
+      {
+        q: "Is the domain currently active?",
+        a: "Yes, paylater.ca currently points to this landing page. After transfer, the new owner can use it as they wish.",
+      },
+      {
+        q: "Can it be used for purposes other than BNPL?",
+        a: 'Absolutely. The "pay later" concept applies to deferred payments, subscriptions, reservations and many other sectors. However, its primary value lies in fintech and BNPL.',
+      },
+      {
+        q: "Do you accept buyers outside Canada?",
+        a: "Yes, global buyers are welcome. International transfer and escrow options are available.",
+      },
+      {
+        q: "Are there any trademark issues?",
+        a: '"Pay later" is a generic term and its use as a domain name is common. We still recommend verifying with your legal counsel.',
+      },
+    ],
+  },
+  footer: {
+    tagline: "— Premium Domain For Sale",
+    rights: "All rights reserved.",
+  },
+  api: {
+    nameMin: "Name must be at least 2 characters",
+    emailInvalid: "Please enter a valid email address",
+    messageMin: "Message must be at least 10 characters",
+    rateLimitEmail: "Too many offers from this email. Please try again later.",
+    rateLimitIp: "Too many requests. Please try again later.",
+    serverError: "An error occurred. Please try again.",
+  },
+} as const;

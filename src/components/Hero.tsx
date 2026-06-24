@@ -1,4 +1,8 @@
-export function Hero() {
+import type { Dictionary } from "@/i18n/get-dictionary";
+
+type Props = { dict: Dictionary };
+
+export function Hero({ dict }: Props) {
   return (
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-32">
       <div className="glow-orb -top-32 left-1/4 h-96 w-96 bg-accent/20 animate-pulse-glow" />
@@ -11,7 +15,7 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
           </span>
-          Premium Domain — Satılık
+          {dict.hero.badge}
         </div>
 
         <h1 className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
@@ -20,37 +24,29 @@ export function Hero() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-          Kanada&apos;nın en güçlü fintech trendi olan{" "}
-          <strong className="text-foreground">Buy Now, Pay Later</strong> (BNPL)
-          sektörü için hazır, akılda kalıcı ve SEO dostu premium domain.
-          Markanızı bugün inşa edin.
+          {dict.hero.subtitle}
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <a
-            href="#iletisim"
+            href="#contact"
             className="inline-flex items-center gap-2 rounded-2xl bg-accent px-7 py-3.5 text-base font-semibold text-background shadow-lg shadow-accent/25 transition hover:bg-accent-light hover:shadow-accent/40"
           >
-            Teklif Verin
+            {dict.hero.cta1}
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
           <a
-            href="#kullanim"
+            href="#use-cases"
             className="inline-flex items-center gap-2 rounded-2xl border border-border bg-card px-7 py-3.5 text-base font-medium text-foreground backdrop-blur transition hover:border-accent/40 hover:bg-accent/5"
           >
-            Kullanım Alanlarını Keşfet
+            {dict.hero.cta2}
           </a>
         </div>
 
         <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {[
-            { value: ".ca", label: "Kanada TLD" },
-            { value: "BNPL", label: "Sektör Lideri" },
-            { value: "9", label: "Karakter" },
-            { value: "∞", label: "Marka Potansiyeli" },
-          ].map((stat) => (
+          {dict.hero.stats.map((stat) => (
             <div
               key={stat.label}
               className="rounded-2xl border border-border bg-card p-4 text-center backdrop-blur"

@@ -1,0 +1,235 @@
+export const dictionary = {
+  meta: {
+    title: "paylater.ca — Domaine Premium à Vendre | BNPL & Fintech",
+    description:
+      "paylater.ca domaine premium à vendre. Extension .ca du Canada — le nom de domaine idéal pour Buy Now Pay Later et la fintech. Soumettez votre offre.",
+    keywords: [
+      "paylater.ca",
+      "domaine à vendre",
+      "domaine premium",
+      "BNPL",
+      "buy now pay later",
+      "domaine fintech",
+      "domaine canada",
+      "domaine .ca",
+    ],
+    ogTitle: "paylater.ca — Domaine Premium à Vendre",
+    ogDescription:
+      "Le domaine premium parfait pour la fintech et le BNPL au Canada. Soumettez votre offre dès aujourd'hui.",
+  },
+  nav: {
+    about: "À propos",
+    useCases: "Cas d'usage",
+    buyers: "Qui devrait acheter",
+    why: "Pourquoi ce domaine",
+    faq: "FAQ",
+    contact: "Contact",
+    makeOffer: "Faire une offre",
+    menu: "Menu",
+  },
+  hero: {
+    badge: "Domaine Premium — À Vendre",
+    subtitle:
+      "Un domaine premium mémorable et optimisé SEO pour la tendance fintech leader au Canada — Buy Now, Pay Later (BNPL). Lancez votre marque dès aujourd'hui.",
+    cta1: "Soumettre une offre",
+    cta2: "Explorer les cas d'usage",
+    stats: [
+      { value: ".ca", label: "TLD Canada" },
+      { value: "BNPL", label: "Leader du secteur" },
+      { value: "9", label: "Caractères" },
+      { value: "∞", label: "Potentiel de marque" },
+    ],
+  },
+  about: {
+    label: "À propos du domaine",
+    title: "Le nom parfait pour",
+    titleHighlight: "l'avenir de la fintech",
+    p1: 'paylater.ca exprime directement « achetez maintenant, payez plus tard » — combinant un concept reconnu internationalement avec l\'extension .ca de confiance du Canada.',
+    p2: "Le marché BNPL devrait atteindre 3 billions de dollars mondialement d'ici 2030. Alors qu'Affirm, Klarna, Sezzle et les acteurs locaux croissent rapidement au Canada, le bon nom de domaine est le fondement de l'avantage concurrentiel.",
+    features: [
+      { icon: "🎯", title: "Sens direct", desc: '"Pay Later" — le terme universel de l\'industrie BNPL' },
+      { icon: "🇨🇦", title: "Axé Canada", desc: "L'extension .ca offre confiance locale et conformité CIRA" },
+      { icon: "📈", title: "Avantage SEO", desc: "Riche en mots-clés, court et mémorable" },
+      { icon: "💎", title: "Qualité premium", desc: "9 caractères, sans tirets, sans chiffres — valeur de marque pure" },
+    ],
+  },
+  useCases: {
+    label: "Cas d'usage",
+    title: "Que pouvez-vous construire avec ce domaine ?",
+    subtitle:
+      "paylater.ca peut héberger des dizaines de modèles commerciaux dans l'écosystème fintech. Voici les scénarios les plus pertinents :",
+    items: [
+      {
+        icon: "💳",
+        title: "Plateforme BNPL",
+        description: "Une plateforme Buy Now Pay Later complète offrant des paiements échelonnés à la caisse.",
+        tags: ["Fintech", "B2C"],
+      },
+      {
+        icon: "🛒",
+        title: "Intégration e-commerce",
+        description: "Solution SaaS ajoutant paiement différé et options de versements au checkout des boutiques en ligne.",
+        tags: ["E-Commerce", "SaaS"],
+      },
+      {
+        icon: "🏦",
+        title: "Banque numérique",
+        description: "Espace de marque pour le module BNPL et paiements flexibles d'une néobanque ou application bancaire.",
+        tags: ["Banking", "Neobank"],
+      },
+      {
+        icon: "📱",
+        title: "Application de paiement mobile",
+        description: "Application fintech grand public offrant « payer plus tard » via QR, NFC et paiements en ligne.",
+        tags: ["Mobile", "Payments"],
+      },
+      {
+        icon: "🏢",
+        title: "Crédit commercial B2B",
+        description: "Solution BNPL commerciale offrant financement de stocks et chaîne d'approvisionnement aux PME.",
+        tags: ["B2B", "Lending"],
+      },
+      {
+        icon: "🔗",
+        title: "Passerelle API de paiement",
+        description: "Plateforme API et portail développeur fournissant l'intégration BNPL aux développeurs.",
+        tags: ["API", "Developer"],
+      },
+    ],
+  },
+  buyers: {
+    label: "Acheteurs cibles",
+    title: "Qui devrait acquérir ce domaine ?",
+    subtitle:
+      "paylater.ca offre une opportunité d'investissement stratégique pour les entreprises et ventures aux profils suivants.",
+    items: [
+      {
+        icon: "🚀",
+        title: "Startups fintech",
+        description: "Identité de marque prête pour les startups BNPL, paiements et prêts en phase seed ou Series A.",
+        highlight: "Entrée rapide sur le marché",
+      },
+      {
+        icon: "🏛️",
+        title: "Banques & prêteurs",
+        description: "Espace de marque pour les produits BNPL numériques des banques traditionnelles et la clientèle jeune.",
+        highlight: "Transformation numérique",
+      },
+      {
+        icon: "🛍️",
+        title: "Plateformes e-commerce",
+        description: "Fournisseurs de solutions de paiement offrant des intégrations Shopify, WooCommerce et marketplaces.",
+        highlight: "Optimisation du checkout",
+      },
+      {
+        icon: "💼",
+        title: "Investisseurs & investisseurs de domaines",
+        description: "Investisseurs stratégiques de portefeuilles de domaines cherchant l'exposition à la croissance fintech.",
+        highlight: "Appréciation de valeur",
+      },
+      {
+        icon: "🌐",
+        title: "Entreprises fintech mondiales",
+        description: "Géants internationaux BNPL et paiements entrant sur le marché canadien (Klarna, Affirm, etc.).",
+        highlight: "Expansion au Canada",
+      },
+      {
+        icon: "⚡",
+        title: "Agences & cabinets de conseil",
+        description: "Agences digitales et cabinets technologiques offrant des solutions fintech à leurs clients.",
+        highlight: "Opportunité white-label",
+      },
+    ],
+  },
+  why: {
+    label: "Valeur d'investissement",
+    title: "Pourquoi",
+    titleDomain: "paylater.ca",
+    titleEnd: " ?",
+    subtitle:
+      "Les domaines premium sont comme l'immobilier numérique — le bon nom au bon endroit remplace des années d'investissement marketing. Ce domaine est au cœur du secteur BNPL.",
+    features: [
+      "Court, mémorable et facile à prononcer",
+      "Compris sur les marchés anglophones et francophones",
+      'Optimisé pour les recherches Google « pay later canada »',
+      "Compatible avec les identifiants réseaux sociaux (@paylater)",
+      "Favorable aux marques, générique et descriptif",
+      "Structure URL idéale pour applications mobiles et documentation API",
+    ],
+    stats: [
+      { stat: "3 000 Mds$+", label: "Taille projetée du marché BNPL en 2030" },
+      { stat: "67 %", label: "Consommateurs canadiens utilisant le BNPL" },
+      { stat: "Top 1 %", label: "Qualité de domaine fintech" },
+      { stat: "Instantané", label: "Reconnaissance et confiance de marque" },
+    ],
+  },
+  contact: {
+    label: "Contact",
+    title: "Soumettez votre offre",
+    subtitle:
+      "Intéressé par paylater.ca ? Remplissez le formulaire ci-dessous. Les offres sérieuses sont prioritaires et nous répondrons rapidement.",
+    email: "E-mail",
+    domain: "Domaine",
+    transfer: "Transfert",
+    transferValue: "Livraison sécurisée via escrow",
+    name: "Nom complet",
+    namePlaceholder: "Votre nom complet",
+    emailPlaceholder: "vous@entreprise.com",
+    company: "Entreprise",
+    companyPlaceholder: "Nom de l'entreprise",
+    phone: "Téléphone",
+    phonePlaceholder: "+1 (555) 000-0000",
+    offerAmount: "Montant de l'offre (USD/CAD)",
+    offerPlaceholder: "ex. 25 000 $ CAD",
+    message: "Votre message",
+    messagePlaceholder: "Votre offre ou questions sur le domaine...",
+    submit: "Envoyer l'offre",
+    submitting: "Envoi en cours...",
+    privacy: "Vos informations sont utilisées uniquement pour la vente du domaine.",
+    success: "✓ Votre message a été envoyé avec succès. Nous vous répondrons sous peu.",
+    connectionError: "Erreur de connexion. Veuillez réessayer.",
+    genericError: "Une erreur s'est produite. Veuillez réessayer.",
+  },
+  faq: {
+    label: "FAQ",
+    title: "Questions fréquemment posées",
+    items: [
+      {
+        q: "Comment le domaine est-il transféré ?",
+        a: "Après accord, le transfert s'effectue via un service d'escrow sécurisé (Escrow.com, Dan.com, etc.). Une fois le paiement confirmé, le domaine est transféré sur votre compte.",
+      },
+      {
+        q: "Le prix est-il fixe ou la négociation est-elle possible ?",
+        a: "Nous fonctionnons sur base d'offres pour les acheteurs sérieux. Soumettez votre offre via le formulaire ou contactez-nous directement.",
+      },
+      {
+        q: "Le domaine est-il actuellement actif ?",
+        a: "Oui, paylater.ca pointe actuellement vers cette page de présentation. Après transfert, le nouveau propriétaire peut l'utiliser librement.",
+      },
+      {
+        q: "Peut-il être utilisé à d'autres fins que le BNPL ?",
+        a: "Absolument. Le concept « payer plus tard » s'applique aux paiements différés, abonnements, réservations et bien d'autres secteurs. Sa valeur principale reste la fintech et le BNPL.",
+      },
+      {
+        q: "Acceptez-vous les acheteurs hors du Canada ?",
+        a: "Oui, les acheteurs internationaux sont les bienvenus. Des options de transfert et d'escrow internationales sont disponibles.",
+      },
+      {
+        q: "Y a-t-il des problèmes de marque déposée ?",
+        a: "« Pay later » est un terme générique et son utilisation comme nom de domaine est courante. Nous recommandons toutefois de vérifier avec votre conseiller juridique.",
+      },
+    ],
+  },
+  footer: {
+    tagline: "— Domaine Premium à Vendre",
+    rights: "Tous droits réservés.",
+  },
+  api: {
+    nameMin: "Le nom doit comporter au moins 2 caractères",
+    emailInvalid: "Veuillez entrer une adresse e-mail valide",
+    messageMin: "Le message doit comporter au moins 10 caractères",
+    rateLimitEmail: "Trop d'offres depuis cette adresse e-mail. Veuillez réessayer plus tard.",
+    rateLimitIp: "Trop de requêtes. Veuillez réessayer plus tard.",
+    serverError: "Une erreur s'est produite. Veuillez réessayer.",
+  },
+} as const;

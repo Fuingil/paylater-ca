@@ -2,18 +2,24 @@
 
 import { useEffect, useState } from "react";
 
-const navLinks = [
-  { href: "#hakkinda", label: "Hakkında" },
-  { href: "#kullanim", label: "Kullanım Alanları" },
-  { href: "#alicilar", label: "Kimler Almalı" },
-  { href: "#neden", label: "Neden Bu Domain" },
-  { href: "#sss", label: "SSS" },
-  { href: "#iletisim", label: "İletişim" },
-];
+import type { Dictionary } from "@/i18n/get-dictionary";
 
-export function Header() {
+type Props = {
+  dict: Dictionary;
+};
+
+export function Header({ dict }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: "#about", label: dict.nav.about },
+    { href: "#use-cases", label: dict.nav.useCases },
+    { href: "#buyers", label: dict.nav.buyers },
+    { href: "#why", label: dict.nav.why },
+    { href: "#faq", label: dict.nav.faq },
+    { href: "#contact", label: dict.nav.contact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -50,10 +56,10 @@ export function Header() {
             </a>
           ))}
           <a
-            href="#iletisim"
+            href="#contact"
             className="ml-2 rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-background transition hover:bg-accent-light"
           >
-            Teklif Ver
+            {dict.nav.makeOffer}
           </a>
         </nav>
 
@@ -61,7 +67,7 @@ export function Header() {
           type="button"
           className="flex h-10 w-10 items-center justify-center rounded-lg border border-border md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menü"
+          aria-label={dict.nav.menu}
         >
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             {menuOpen ? (

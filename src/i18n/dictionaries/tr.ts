@@ -1,0 +1,235 @@
+export const dictionary = {
+  meta: {
+    title: "paylater.ca — Premium Domain Satılık | BNPL & Fintech",
+    description:
+      "paylater.ca premium domain satılık. Kanada'nın .ca uzantılı, Buy Now Pay Later ve fintech sektörü için ideal marka alan adı. Teklif verin.",
+    keywords: [
+      "paylater.ca",
+      "domain satılık",
+      "premium domain",
+      "BNPL",
+      "buy now pay later",
+      "fintech domain",
+      "canada domain",
+      ".ca domain",
+    ],
+    ogTitle: "paylater.ca — Premium Domain Satılık",
+    ogDescription:
+      "Kanada fintech ve BNPL sektörü için mükemmel premium domain. Hemen teklif verin.",
+  },
+  nav: {
+    about: "Hakkında",
+    useCases: "Kullanım Alanları",
+    buyers: "Kimler Almalı",
+    why: "Neden Bu Domain",
+    faq: "SSS",
+    contact: "İletişim",
+    makeOffer: "Teklif Ver",
+    menu: "Menü",
+  },
+  hero: {
+    badge: "Premium Domain — Satılık",
+    subtitle:
+      "Kanada'nın en güçlü fintech trendi olan Buy Now, Pay Later (BNPL) sektörü için hazır, akılda kalıcı ve SEO dostu premium domain. Markanızı bugün inşa edin.",
+    cta1: "Teklif Verin",
+    cta2: "Kullanım Alanlarını Keşfet",
+    stats: [
+      { value: ".ca", label: "Kanada TLD" },
+      { value: "BNPL", label: "Sektör Lideri" },
+      { value: "9", label: "Karakter" },
+      { value: "∞", label: "Marka Potansiyeli" },
+    ],
+  },
+  about: {
+    label: "Domain Hakkında",
+    title: "Fintech'in Geleceği İçin",
+    titleHighlight: "Mükemmel İsim",
+    p1: 'paylater.ca, "şimdi al, sonra öde" anlamını doğrudan taşıyan, uluslararası tanınan bir kavramı Kanada\'nın güvenilir .ca uzantısıyla birleştiriyor.',
+    p2: "BNPL pazarı 2030 yılına kadar küresel olarak 3 trilyon dolara ulaşması beklenen devasa bir sektör. Kanada'da Affirm, Klarna, Sezzle ve yerel oyuncular hızla büyürken, doğru domain adı rekabet avantajının temelidir.",
+    features: [
+      { icon: "🎯", title: "Doğrudan Anlam", desc: '"Pay Later" — BNPL sektörünün evrensel terimi' },
+      { icon: "🇨🇦", title: "Kanada Odaklı", desc: ".ca uzantısı yerel güven ve CIRA uyumluluğu sağlar" },
+      { icon: "📈", title: "SEO Avantajı", desc: "Anahtar kelime zengin, kısa ve akılda kalıcı" },
+      { icon: "💎", title: "Premium Kalite", desc: "9 karakter, tire yok, rakam yok — saf marka değeri" },
+    ],
+  },
+  useCases: {
+    label: "Kullanım Alanları",
+    title: "Bu Domain ile Neler Yapılabilir?",
+    subtitle:
+      "paylater.ca, fintech ekosisteminde onlarca farklı iş modeline ev sahipliği yapabilir. İşte en güçlü senaryolar:",
+    items: [
+      {
+        icon: "💳",
+        title: "BNPL Platformu",
+        description: "Tüketicilere alışverişte taksitli ödeme sunan tam kapsamlı bir Buy Now Pay Later platformu.",
+        tags: ["Fintech", "B2C"],
+      },
+      {
+        icon: "🛒",
+        title: "E-Ticaret Entegrasyonu",
+        description: "Online mağazalara checkout aşamasında ödeme erteleme ve taksit seçenekleri ekleyen SaaS çözümü.",
+        tags: ["E-Commerce", "SaaS"],
+      },
+      {
+        icon: "🏦",
+        title: "Dijital Bankacılık",
+        description: "Neobank veya dijital banka uygulamasının BNPL ve esnek ödeme modülü için marka alanı.",
+        tags: ["Banking", "Neobank"],
+      },
+      {
+        icon: "📱",
+        title: "Mobil Ödeme Uygulaması",
+        description: "QR kod, NFC ve online ödemelerde 'sonra öde' özelliği sunan consumer fintech uygulaması.",
+        tags: ["Mobile", "Payments"],
+      },
+      {
+        icon: "🏢",
+        title: "B2B Ticari Kredi",
+        description: "KOBİ'lere envanter ve tedarik zinciri finansmanı sunan ticari BNPL çözümü.",
+        tags: ["B2B", "Lending"],
+      },
+      {
+        icon: "🔗",
+        title: "Ödeme API Gateway",
+        description: "Geliştiricilere BNPL entegrasyonu sağlayan API platformu ve developer portal.",
+        tags: ["API", "Developer"],
+      },
+    ],
+  },
+  buyers: {
+    label: "Hedef Alıcılar",
+    title: "Kimler Bu Domain'i Almalı?",
+    subtitle:
+      "paylater.ca, aşağıdaki profildeki şirket ve girişimler için stratejik bir yatırım fırsatı sunuyor.",
+    items: [
+      {
+        icon: "🚀",
+        title: "Fintech Startup'ları",
+        description: "Seed veya Series A aşamasındaki BNPL, ödeme ve lending startup'ları için hazır marka kimliği.",
+        highlight: "Hızlı pazar girişi",
+      },
+      {
+        icon: "🏛️",
+        title: "Bankalar & Kredi Kuruluşları",
+        description: "Geleneksel bankaların dijital BNPL ürünleri ve genç müşteri segmentine yönelik marka alanı.",
+        highlight: "Dijital dönüşüm",
+      },
+      {
+        icon: "🛍️",
+        title: "E-Ticaret Platformları",
+        description: "Shopify, WooCommerce ve marketplace entegrasyonları sunan ödeme çözüm sağlayıcıları.",
+        highlight: "Checkout optimizasyonu",
+      },
+      {
+        icon: "💼",
+        title: "Yatırımcılar & Domain Yatırımcıları",
+        description: "Fintech sektörünün büyümesinden pay almak isteyen stratejik domain portföy yatırımcıları.",
+        highlight: "Değer artışı potansiyeli",
+      },
+      {
+        icon: "🌐",
+        title: "Global Fintech Şirketleri",
+        description: "Kanada pazarına giriş yapmak isteyen uluslararası BNPL ve ödeme devleri (Klarna, Affirm vb.).",
+        highlight: "Kanada expansion",
+      },
+      {
+        icon: "⚡",
+        title: "Ajanslar & Danışmanlıklar",
+        description: "Müşterilerine fintech çözümleri sunan dijital ajanslar ve teknoloji danışmanlık firmaları.",
+        highlight: "White-label fırsatı",
+      },
+    ],
+  },
+  why: {
+    label: "Yatırım Değeri",
+    title: "Neden",
+    titleDomain: "paylater.ca",
+    titleEnd: "?",
+    subtitle:
+      "Premium domain'ler dijital gayrimenkul gibidir — doğru konumdaki doğru isim, yıllarca süren pazarlama yatırımının yerini alır. Bu domain, BNPL sektörünün tam kalbinde duruyor.",
+    features: [
+      "Kısa, akılda kalıcı ve telaffuzu kolay",
+      "İngilizce ve Fransızca pazarlarda anlaşılır",
+      'Google\'da "pay later canada" aramalarına uygun',
+      "Sosyal medya kullanıcı adlarıyla uyumlu (@paylater)",
+      "Trademark dostu, jenerik ve açıklayıcı",
+      "Mobil uygulama ve API dokümantasyonu için ideal URL yapısı",
+    ],
+    stats: [
+      { stat: "3T$+", label: "2030 BNPL pazar büyüklüğü tahmini" },
+      { stat: "%67", label: "Kanadalı tüketicilerin BNPL kullanım oranı" },
+      { stat: "Top 1%", label: "Fintech domain kalitesi" },
+      { stat: "Anında", label: "Marka tanınırlığı ve güven" },
+    ],
+  },
+  contact: {
+    label: "İletişim",
+    title: "Teklif Verin",
+    subtitle:
+      "paylater.ca ile ilgileniyorsanız formu doldurun. En kısa sürede size dönüş yapılacaktır. Ciddi teklifler önceliklidir.",
+    email: "E-posta",
+    domain: "Domain",
+    transfer: "Transfer",
+    transferValue: "Güvenli escrow ile teslim",
+    name: "Ad Soyad",
+    namePlaceholder: "Adınız Soyadınız",
+    emailPlaceholder: "ornek@sirket.com",
+    company: "Şirket",
+    companyPlaceholder: "Şirket adı",
+    phone: "Telefon",
+    phonePlaceholder: "+1 (555) 000-0000",
+    offerAmount: "Teklif Tutarı (USD/CAD)",
+    offerPlaceholder: "ör. $25,000 CAD",
+    message: "Mesajınız",
+    messagePlaceholder: "Domain ile ilgili teklifiniz veya sorularınız...",
+    submit: "Teklif Gönder",
+    submitting: "Gönderiliyor...",
+    privacy: "Bilgileriniz yalnızca domain satış süreci için kullanılır.",
+    success: "✓ Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.",
+    connectionError: "Bağlantı hatası. Lütfen tekrar deneyin.",
+    genericError: "Bir hata oluştu. Lütfen tekrar deneyin.",
+  },
+  faq: {
+    label: "SSS",
+    title: "Sıkça Sorulan Sorular",
+    items: [
+      {
+        q: "Domain transferi nasıl yapılır?",
+        a: "Anlaşma sağlandıktan sonra güvenli bir escrow hizmeti (Escrow.com, Dan.com vb.) üzerinden transfer gerçekleştirilir. Ödeme onaylandıktan sonra domain hesabınıza aktarılır.",
+      },
+      {
+        q: "Fiyat sabit mi, pazarlık yapılabilir mi?",
+        a: "Ciddi alıcılar için teklif usulü çalışıyoruz. Form üzerinden teklifinizi iletebilir veya doğrudan iletişime geçebilirsiniz.",
+      },
+      {
+        q: "Domain şu an aktif mi?",
+        a: "Evet, paylater.ca şu an bu tanıtım sayfasına yönlendirilmektedir. Transfer sonrası yeni sahibi dilediği şekilde kullanabilir.",
+      },
+      {
+        q: "BNPL dışında başka amaçlarla kullanılabilir mi?",
+        a: 'Kesinlikle. "Pay later" kavramı ödeme erteleme, abonelik modeli, rezervasyon ve daha birçok sektörde kullanılabilir. Ancak asıl değer fintech ve BNPL alanındadır.',
+      },
+      {
+        q: "Kanada dışından alıcı kabul ediyor musunuz?",
+        a: "Evet, global alıcılar memnuniyetle karşılanır. Uluslararası transfer ve escrow seçenekleri mevcuttur.",
+      },
+      {
+        q: "Trademark sorunu var mı?",
+        a: '"Pay later" jenerik bir terimdir ve domain adı olarak kullanımı yaygındır. Yine de kendi hukuki danışmanınızla doğrulamanızı öneririz.',
+      },
+    ],
+  },
+  footer: {
+    tagline: "— Premium Domain Satılık",
+    rights: "Tüm hakları saklıdır.",
+  },
+  api: {
+    nameMin: "İsim en az 2 karakter olmalıdır",
+    emailInvalid: "Geçerli bir e-posta adresi girin",
+    messageMin: "Mesaj en az 10 karakter olmalıdır",
+    rateLimitEmail: "Bu e-posta adresiyle çok fazla teklif gönderildi. Lütfen daha sonra tekrar deneyin.",
+    rateLimitIp: "Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.",
+    serverError: "Bir hata oluştu. Lütfen tekrar deneyin.",
+  },
+} as const;

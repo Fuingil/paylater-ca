@@ -1,22 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+import { isValidLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/get-dictionary";
 import { db } from "@/lib/db";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
-const contactSchema = z.object({
-  name: z.string().min(2, "İsim en az 2 karakter olmalıdır"),
-  email: z.string().email("Geçerli bir e-posta adresi girin"),
-  company: z.string().optional(),
-  phone: z.string().optional(),
-  offerAmount: z.string().optional(),
-  message: z.string().min(10, "Mesaj en az 10 karakter olmalıdır"),
-  website: z.string().optional(),
-});
+function getContactSchema(locale: Locale) {
+  const t = getDictionary(locale).api;
+  return z.object({
+    name: z.string().min(2, t.nameMin),
+    email: z.string().email(t.emailInvalid),
+    company: z.string().optional(),
+    phone: z.string().optional(),
+    offerAmount: z.string().optional(),
+    message: z.string().min(10, t.messageMin),
+    website: z.string().optional(),
+    locale: z.string().optional(),
+  });
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    const locale: Locale =
+      body.locale && isValidLocale(body.locale) ? body.locale : "en";
+    const contactSchema = getContactSchema(locale);
     const data = contactSchema.parse(body);
 
     if (data.website) {
@@ -25,10 +34,13 @@ export async function POST(request: NextRequest) {
 
     const email = data.email.trim().toLowerCase();
     const ipAddress = getClientIp(request);
+    const t = getDictionary(locale).api;
 
-    const rateLimitError = await checkRateLimit(email, ipAddress);
-    if (rateLimitError) {
-      return NextResponse.json({ success: false, message: rateLimitError }, { status: 429 });
+    const rateLimitReason = await checkRateLimit(email, ipAddress);
+    if (rateLimitReason) {
+      const message =
+        rateLimitReason === "email" ? t.rateLimitEmail : t.rateLimitIp;
+      return NextResponse.json({ success: false, message }, { status: 429 });
     }
 
     const inquiry = await db.contactInquiry.create({
@@ -58,7 +70,7 @@ export async function POST(request: NextRequest) {
 
     console.error("Contact form error:", error);
     return NextResponse.json(
-      { success: false, message: "Bir hata oluştu. Lütfen tekrar deneyin." },
+      { success: false, message: getDictionary("en").api.serverError },
       { status: 500 },
     );
   }
