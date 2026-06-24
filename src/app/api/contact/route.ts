@@ -5,6 +5,7 @@ import { isValidLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { db } from "@/lib/db";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { sendInquiryNotification } from "@/lib/send-inquiry-email";
 
 function getContactSchema(locale: Locale) {
   const t = getDictionary(locale).api;
@@ -55,6 +56,20 @@ export async function POST(request: NextRequest) {
         userAgent: request.headers.get("user-agent") ?? null,
       },
     });
+
+    try {
+      await sendInquiryNotification({
+        name: data.name.trim(),
+        email,
+        company: data.company?.trim() || null,
+        phone: data.phone?.trim() || null,
+        offerAmount: data.offerAmount?.trim() || null,
+        message: data.message.trim(),
+        locale,
+      });
+    } catch (emailError) {
+      console.error("Inquiry email failed:", emailError);
+    }
 
     return NextResponse.json(
       { success: true, id: inquiry.id },
