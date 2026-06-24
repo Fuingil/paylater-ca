@@ -23,6 +23,7 @@ export function ContactForm() {
       phone: (formData.get("phone") as string) || undefined,
       offerAmount: (formData.get("offerAmount") as string) || undefined,
       message: formData.get("message") as string,
+      website: (formData.get("website") as string) || undefined,
     };
 
     try {
@@ -115,6 +116,10 @@ export function ContactForm() {
               )}
 
               <div className="grid gap-5 sm:grid-cols-2">
+                <div className="absolute -left-[9999px]" aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                </div>
                 <div>
                   <label htmlFor="name" className="mb-1.5 block text-sm font-medium">
                     Ad Soyad <span className="text-accent">*</span>

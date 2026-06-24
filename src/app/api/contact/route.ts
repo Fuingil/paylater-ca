@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import { db } from "@/lib/db";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 const contactSchema = z.object({
   name: z.string().min(2, "İsim en az 2 karakter olmalıdır"),
@@ -10,6 +11,7 @@ const contactSchema = z.object({
   phone: z.string().optional(),
   offerAmount: z.string().optional(),
   message: z.string().min(10, "Mesaj en az 10 karakter olmalıdır"),
+  website: z.string().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -17,18 +19,27 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const data = contactSchema.parse(body);
 
+    if (data.website) {
+      return NextResponse.json({ success: true, id: "ok" }, { status: 201 });
+    }
+
+    const email = data.email.trim().toLowerCase();
+    const ipAddress = getClientIp(request);
+
+    const rateLimitError = await checkRateLimit(email, ipAddress);
+    if (rateLimitError) {
+      return NextResponse.json({ success: false, message: rateLimitError }, { status: 429 });
+    }
+
     const inquiry = await db.contactInquiry.create({
       data: {
         name: data.name.trim(),
-        email: data.email.trim().toLowerCase(),
+        email,
         company: data.company?.trim() || null,
         phone: data.phone?.trim() || null,
         offerAmount: data.offerAmount?.trim() || null,
         message: data.message.trim(),
-        ipAddress:
-          request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-          request.headers.get("x-real-ip") ??
-          null,
+        ipAddress,
         userAgent: request.headers.get("user-agent") ?? null,
       },
     });

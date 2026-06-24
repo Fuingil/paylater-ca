@@ -28,6 +28,12 @@ npm run dev
 | `DATABASE_URL` | Neon PostgreSQL bağlantı dizesi |
 | `NEXT_PUBLIC_APP_URL` | Site URL'i (ör. https://paylater.ca) |
 
+## Admin Paneli
+
+Gelen teklifleri görüntülemek için: **https://paylater.ca/admin**
+
+Şifre: Vercel'deki `ADMIN_SECRET` ortam değişkeni.
+
 ## Canlı Adresler
 
 | Platform | URL |

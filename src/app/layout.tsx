@@ -15,6 +15,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://paylater.ca"),
   title: "paylater.ca — Premium Domain Satılık | BNPL & Fintech",
   description:
     "paylater.ca premium domain satılık. Kanada'nın .ca uzantılı, Buy Now Pay Later ve fintech sektörü için ideal marka alan adı. Teklif verin.",
