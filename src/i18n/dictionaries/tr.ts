@@ -192,6 +192,7 @@ export const dictionary = {
     captchaLabel: "Güvenlik doğrulaması",
     captchaRefresh: "Yenile",
     captchaInvalid: "Güvenlik doğrulaması yanlış. Lütfen tekrar deneyin.",
+    captchaLoadError: "Güvenlik doğrulaması yüklenemedi. Lütfen yenileyin.",
   },
   faq: {
     label: "SSS",

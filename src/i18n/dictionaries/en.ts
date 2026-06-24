@@ -192,6 +192,7 @@ export const dictionary = {
     captchaLabel: "Security check",
     captchaRefresh: "New",
     captchaInvalid: "Incorrect security check answer. Please try again.",
+    captchaLoadError: "Could not load security check. Please refresh.",
   },
   faq: {
     label: "FAQ",

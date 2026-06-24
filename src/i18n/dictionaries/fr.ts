@@ -192,6 +192,7 @@ export const dictionary = {
     captchaLabel: "Vérification de sécurité",
     captchaRefresh: "Nouveau",
     captchaInvalid: "Réponse de vérification incorrecte. Veuillez réessayer.",
+    captchaLoadError: "Impossible de charger la vérification. Veuillez actualiser.",
   },
   faq: {
     label: "FAQ",

@@ -10,6 +10,7 @@ import { Hero } from "@/components/Hero";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { UseCases } from "@/components/UseCases";
 import { WhyDomain } from "@/components/WhyDomain";
+import { createCaptchaChallenge } from "@/lib/captcha";
 import { isValidLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 
@@ -22,6 +23,7 @@ export default async function HomePage({ params }: Props) {
   if (!isValidLocale(locale)) notFound();
 
   const dict = getDictionary(locale as Locale);
+  const initialCaptcha = createCaptchaChallenge();
 
   return (
     <>
@@ -32,7 +34,11 @@ export default async function HomePage({ params }: Props) {
         <UseCases dict={dict} />
         <Buyers dict={dict} />
         <WhyDomain dict={dict} />
-        <ContactForm dict={dict} locale={locale as Locale} />
+        <ContactForm
+          dict={dict}
+          locale={locale as Locale}
+          initialCaptcha={initialCaptcha}
+        />
         <FAQ dict={dict} />
       </main>
       <Footer dict={dict} />
