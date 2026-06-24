@@ -3,32 +3,16 @@ import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
-const MAX_SUBMISSIONS_PER_EMAIL = 3;
-const MAX_SUBMISSIONS_PER_IP = 5;
+const MAX_SUBMISSIONS_PER_EMAIL = 10;
 
-export type RateLimitReason = "email" | "ip";
-
-export async function checkRateLimit(
-  email: string,
-  ipAddress: string | null,
-): Promise<RateLimitReason | null> {
+export async function checkRateLimit(email: string): Promise<boolean> {
   const since = new Date(Date.now() - RATE_LIMIT_WINDOW_MS);
 
   const emailCount = await db.contactInquiry.count({
     where: { email, createdAt: { gte: since } },
   });
 
-  if (emailCount >= MAX_SUBMISSIONS_PER_EMAIL) return "email";
-
-  if (ipAddress) {
-    const ipCount = await db.contactInquiry.count({
-      where: { ipAddress, createdAt: { gte: since } },
-    });
-
-    if (ipCount >= MAX_SUBMISSIONS_PER_IP) return "ip";
-  }
-
-  return null;
+  return emailCount >= MAX_SUBMISSIONS_PER_EMAIL;
 }
 
 export function getClientIp(request: NextRequest): string | null {

@@ -1,11 +1,16 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 
-import type { Dictionary } from "@/i18n/get-dictionary";
 import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/get-dictionary";
 
 type FormState = "idle" | "loading" | "success" | "error";
+
+type CaptchaData = {
+  question: string;
+  token: string;
+};
 
 type Props = {
   dict: Dictionary;
@@ -15,12 +20,51 @@ type Props = {
 export function ContactForm({ dict, locale }: Props) {
   const [state, setState] = useState<FormState>("idle");
   const [errors, setErrors] = useState<string[]>([]);
+  const [captcha, setCaptcha] = useState<CaptchaData | null>(null);
+  const [captchaLoading, setCaptchaLoading] = useState(true);
   const t = dict.contact;
+
+  const loadCaptcha = useCallback(async (showLoading = true) => {
+    if (showLoading) setCaptchaLoading(true);
+    try {
+      const res = await fetch("/api/captcha");
+      if (res.ok) {
+        setCaptcha(await res.json());
+      }
+    } finally {
+      setCaptchaLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const res = await fetch("/api/captcha");
+        if (!cancelled && res.ok) {
+          setCaptcha(await res.json());
+        }
+      } finally {
+        if (!cancelled) setCaptchaLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setState("loading");
     setErrors([]);
+
+    if (!captcha) {
+      setErrors([t.captchaInvalid]);
+      setState("error");
+      return;
+    }
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -33,6 +77,8 @@ export function ContactForm({ dict, locale }: Props) {
       offerAmount: (formData.get("offerAmount") as string) || undefined,
       message: formData.get("message") as string,
       website: (formData.get("website") as string) || undefined,
+      captchaToken: captcha.token,
+      captchaAnswer: formData.get("captchaAnswer") as string,
       locale,
     };
 
@@ -48,14 +94,17 @@ export function ContactForm({ dict, locale }: Props) {
       if (!res.ok) {
         setErrors(data.errors ?? [data.message ?? t.genericError]);
         setState("error");
+        await loadCaptcha();
         return;
       }
 
       setState("success");
       form.reset();
+      await loadCaptcha();
     } catch {
       setErrors([t.connectionError]);
       setState("error");
+      await loadCaptcha();
     }
   }
 
@@ -208,9 +257,38 @@ export function ContactForm({ dict, locale }: Props) {
                 />
               </div>
 
+              <div className="mt-5 rounded-xl border border-border bg-background/40 p-4">
+                <label htmlFor="captchaAnswer" className="mb-2 block text-sm font-medium">
+                  {t.captchaLabel} <span className="text-accent">*</span>
+                </label>
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex h-11 min-w-[120px] items-center justify-center rounded-lg bg-accent/10 px-4 font-mono text-lg font-bold tracking-widest text-accent-light">
+                    {captchaLoading ? "..." : `${captcha?.question} = ?`}
+                  </div>
+                  <input
+                    id="captchaAnswer"
+                    name="captchaAnswer"
+                    type="text"
+                    inputMode="numeric"
+                    required
+                    autoComplete="off"
+                    className="w-24 rounded-xl border border-border bg-background/50 px-4 py-3 text-sm outline-none transition focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
+                    placeholder="?"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => void loadCaptcha()}
+                    className="rounded-lg border border-border px-3 py-2 text-xs text-muted transition hover:bg-white/5 hover:text-foreground"
+                    title={t.captchaRefresh}
+                  >
+                    ↻ {t.captchaRefresh}
+                  </button>
+                </div>
+              </div>
+
               <button
                 type="submit"
-                disabled={state === "loading"}
+                disabled={state === "loading" || captchaLoading || !captcha}
                 className="mt-6 w-full rounded-2xl bg-accent py-3.5 text-base font-semibold text-background transition hover:bg-accent-light disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {state === "loading" ? t.submitting : t.submit}

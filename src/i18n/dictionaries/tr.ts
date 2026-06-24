@@ -189,6 +189,9 @@ export const dictionary = {
     success: "✓ Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.",
     connectionError: "Bağlantı hatası. Lütfen tekrar deneyin.",
     genericError: "Bir hata oluştu. Lütfen tekrar deneyin.",
+    captchaLabel: "Güvenlik doğrulaması",
+    captchaRefresh: "Yenile",
+    captchaInvalid: "Güvenlik doğrulaması yanlış. Lütfen tekrar deneyin.",
   },
   faq: {
     label: "SSS",
@@ -231,5 +234,7 @@ export const dictionary = {
     rateLimitEmail: "Bu e-posta adresiyle çok fazla teklif gönderildi. Lütfen daha sonra tekrar deneyin.",
     rateLimitIp: "Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.",
     serverError: "Bir hata oluştu. Lütfen tekrar deneyin.",
+    captchaRequired: "Lütfen güvenlik doğrulamasını tamamlayın",
+    captchaInvalid: "Güvenlik doğrulaması yanlış",
   },
 } as const;

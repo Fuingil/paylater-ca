@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+import { verifyCaptchaChallenge } from "@/lib/captcha";
 import { isValidLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { db } from "@/lib/db";
@@ -18,6 +19,8 @@ function getContactSchema(locale: Locale) {
     message: z.string().min(10, t.messageMin),
     website: z.string().optional(),
     locale: z.string().optional(),
+    captchaToken: z.string().min(1, t.captchaRequired),
+    captchaAnswer: z.string().min(1, t.captchaRequired),
   });
 }
 
@@ -28,20 +31,27 @@ export async function POST(request: NextRequest) {
       body.locale && isValidLocale(body.locale) ? body.locale : "en";
     const contactSchema = getContactSchema(locale);
     const data = contactSchema.parse(body);
+    const t = getDictionary(locale).api;
 
     if (data.website) {
       return NextResponse.json({ success: true, id: "ok" }, { status: 201 });
     }
 
+    if (!verifyCaptchaChallenge(data.captchaToken, data.captchaAnswer)) {
+      return NextResponse.json(
+        { success: false, message: t.captchaInvalid },
+        { status: 400 },
+      );
+    }
+
     const email = data.email.trim().toLowerCase();
     const ipAddress = getClientIp(request);
-    const t = getDictionary(locale).api;
 
-    const rateLimitReason = await checkRateLimit(email, ipAddress);
-    if (rateLimitReason) {
-      const message =
-        rateLimitReason === "email" ? t.rateLimitEmail : t.rateLimitIp;
-      return NextResponse.json({ success: false, message }, { status: 429 });
+    if (await checkRateLimit(email)) {
+      return NextResponse.json(
+        { success: false, message: t.rateLimitEmail },
+        { status: 429 },
+      );
     }
 
     const inquiry = await db.contactInquiry.create({

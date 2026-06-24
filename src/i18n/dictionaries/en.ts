@@ -189,6 +189,9 @@ export const dictionary = {
     success: "✓ Your message was sent successfully. We'll get back to you shortly.",
     connectionError: "Connection error. Please try again.",
     genericError: "An error occurred. Please try again.",
+    captchaLabel: "Security check",
+    captchaRefresh: "New",
+    captchaInvalid: "Incorrect security check answer. Please try again.",
   },
   faq: {
     label: "FAQ",
@@ -231,5 +234,7 @@ export const dictionary = {
     rateLimitEmail: "Too many offers from this email. Please try again later.",
     rateLimitIp: "Too many requests. Please try again later.",
     serverError: "An error occurred. Please try again.",
+    captchaRequired: "Please complete the security check",
+    captchaInvalid: "Incorrect security check answer",
   },
 } as const;

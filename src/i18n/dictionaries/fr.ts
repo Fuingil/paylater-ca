@@ -189,6 +189,9 @@ export const dictionary = {
     success: "✓ Votre message a été envoyé avec succès. Nous vous répondrons sous peu.",
     connectionError: "Erreur de connexion. Veuillez réessayer.",
     genericError: "Une erreur s'est produite. Veuillez réessayer.",
+    captchaLabel: "Vérification de sécurité",
+    captchaRefresh: "Nouveau",
+    captchaInvalid: "Réponse de vérification incorrecte. Veuillez réessayer.",
   },
   faq: {
     label: "FAQ",
@@ -231,5 +234,7 @@ export const dictionary = {
     rateLimitEmail: "Trop d'offres depuis cette adresse e-mail. Veuillez réessayer plus tard.",
     rateLimitIp: "Trop de requêtes. Veuillez réessayer plus tard.",
     serverError: "Une erreur s'est produite. Veuillez réessayer.",
+    captchaRequired: "Veuillez compléter la vérification de sécurité",
+    captchaInvalid: "Réponse de vérification incorrecte",
   },
 } as const;
