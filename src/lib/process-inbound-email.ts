@@ -71,7 +71,7 @@ export async function processInboundEmail(emailId: string): Promise<boolean> {
   const body =
     data.text?.trim() ||
     stripHtml(data.html ?? "") ||
-    "(Boş mesaj)";
+    "(Empty message)";
 
   await db.inquiryMessage.create({
     data: {

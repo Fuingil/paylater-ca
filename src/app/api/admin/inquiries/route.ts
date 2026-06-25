@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { db } from "@/lib/db";
+import { normalizeInquiryMessages } from "@/lib/inquiry-messages";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   if (!isAdminAuthenticated(request)) {
@@ -17,5 +20,18 @@ export async function GET(request: NextRequest) {
     },
   });
 
-  return NextResponse.json({ inquiries, total: inquiries.length });
+  return NextResponse.json(
+    {
+      inquiries: inquiries.map((inquiry) => ({
+        ...inquiry,
+        messages: normalizeInquiryMessages(inquiry),
+      })),
+      total: inquiries.length,
+    },
+    {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+      },
+    },
+  );
 }

@@ -1,17 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 
-type InquiryMessage = {
-  id: string;
-  direction: string;
-  body: string;
-  subject: string | null;
-  fromEmail: string;
-  toEmail: string;
-  createdAt: string;
-};
+import {
+  formatMessageDateTime,
+  normalizeInquiryMessages,
+  type InquiryMessageDto,
+} from "@/lib/inquiry-messages";
 
 type Inquiry = {
   id: string;
@@ -22,24 +18,8 @@ type Inquiry = {
   offerAmount: string | null;
   message: string;
   createdAt: string;
-  messages: InquiryMessage[];
+  messages: InquiryMessageDto[];
 };
-
-function getThreadMessages(inquiry: Inquiry): InquiryMessage[] {
-  if (inquiry.messages.length > 0) return inquiry.messages;
-
-  return [
-    {
-      id: `initial-${inquiry.id}`,
-      direction: "initial",
-      body: inquiry.message,
-      subject: "İlk teklif mesajı",
-      fromEmail: inquiry.email,
-      toEmail: "info@paylater.ca",
-      createdAt: inquiry.createdAt,
-    },
-  ];
-}
 
 function directionLabel(direction: string): string {
   switch (direction) {
@@ -54,9 +34,14 @@ function directionLabel(direction: string): string {
   }
 }
 
+function getThreadMessages(inquiry: Inquiry): InquiryMessageDto[] {
+  return normalizeInquiryMessages(inquiry);
+}
+
 export function AdminPanel() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [replyText, setReplyText] = useState("");
@@ -68,38 +53,75 @@ export function AdminPanel() {
   const selectedInquiry =
     inquiries.find((inquiry) => inquiry.id === selectedId) ?? null;
 
-  async function fetchInquiries(selectFirst = false) {
-    const res = await fetch("/api/admin/inquiries");
-    if (res.ok) {
-      const data = await res.json();
-      setInquiries(data.inquiries);
-      setAuthenticated(true);
-      if (selectFirst && data.inquiries.length > 0) {
-        setSelectedId(data.inquiries[0].id);
+  const fetchInquiries = useCallback(
+    async (options?: { selectFirst?: boolean; showRefresh?: boolean }) => {
+      if (options?.showRefresh) {
+        setRefreshing(true);
       }
-    } else {
-      setAuthenticated(false);
-    }
-    setLoading(false);
-  }
+
+      try {
+        const res = await fetch("/api/admin/inquiries", {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache" },
+        });
+
+        if (res.ok) {
+          const data = (await res.json()) as { inquiries: Inquiry[] };
+          setInquiries(data.inquiries);
+          setAuthenticated(true);
+
+          if (options?.selectFirst && data.inquiries.length > 0) {
+            setSelectedId(data.inquiries[0].id);
+          } else {
+            setSelectedId((current) => {
+              if (current && data.inquiries.some((i) => i.id === current)) {
+                return current;
+              }
+              return data.inquiries[0]?.id ?? null;
+            });
+          }
+        } else {
+          setAuthenticated(false);
+        }
+      } catch {
+        setError("Teklifler yüklenemedi. Bağlantınızı kontrol edin.");
+      } finally {
+        setLoading(false);
+        setRefreshing(false);
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     let active = true;
 
     void (async () => {
-      const res = await fetch("/api/admin/inquiries");
-      if (!active) return;
-      if (res.ok) {
-        const data = await res.json();
-        setInquiries(data.inquiries);
-        setAuthenticated(true);
-        if (data.inquiries.length > 0) {
-          setSelectedId(data.inquiries[0].id);
+      try {
+        const res = await fetch("/api/admin/inquiries", {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache" },
+        });
+
+        if (!active) return;
+
+        if (res.ok) {
+          const data = (await res.json()) as { inquiries: Inquiry[] };
+          setInquiries(data.inquiries);
+          setAuthenticated(true);
+          if (data.inquiries.length > 0) {
+            setSelectedId(data.inquiries[0].id);
+          }
+        } else {
+          setAuthenticated(false);
         }
-      } else {
-        setAuthenticated(false);
+      } catch {
+        if (active) {
+          setError("Teklifler yüklenemedi. Bağlantınızı kontrol edin.");
+        }
+      } finally {
+        if (active) setLoading(false);
       }
-      setLoading(false);
     })();
 
     return () => {
@@ -120,7 +142,7 @@ export function AdminPanel() {
     });
 
     if (res.ok) {
-      await fetchInquiries(true);
+      await fetchInquiries({ selectFirst: true });
     } else {
       setError("Geçersiz şifre");
     }
@@ -141,11 +163,15 @@ export function AdminPanel() {
     setReplyLoading(true);
     setReplyError("");
 
-    const res = await fetch(`/api/admin/inquiries/${selectedInquiry.id}/reply`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: replyText }),
-    });
+    const res = await fetch(
+      `/api/admin/inquiries/${selectedInquiry.id}/reply`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: replyText }),
+        cache: "no-store",
+      },
+    );
 
     const data = await res.json();
 
@@ -224,10 +250,11 @@ export function AdminPanel() {
           <div className="flex gap-3">
             <button
               type="button"
-              onClick={() => void fetchInquiries()}
-              className="rounded-lg border border-border px-4 py-2 text-sm text-muted hover:text-foreground"
+              onClick={() => void fetchInquiries({ showRefresh: true })}
+              disabled={refreshing}
+              className="rounded-lg border border-border px-4 py-2 text-sm text-muted hover:text-foreground disabled:cursor-wait disabled:opacity-60"
             >
-              Yenile
+              {refreshing ? "Yenileniyor..." : "Yenile"}
             </button>
             <Link
               href="/"
@@ -281,12 +308,15 @@ export function AdminPanel() {
                         </div>
                         <div className="text-xs text-muted">{inquiry.email}</div>
                       </div>
-                      <time className="shrink-0 text-[10px] text-muted">
-                        {new Date(inquiry.createdAt).toLocaleDateString("tr-TR")}
+                      <time
+                        className="shrink-0 text-[10px] text-muted"
+                        dateTime={inquiry.createdAt}
+                      >
+                        {formatMessageDateTime(inquiry.createdAt)}
                       </time>
                     </div>
                     <p className="mt-2 line-clamp-2 text-xs text-muted">
-                      {lastMessage.body}
+                      {lastMessage?.body}
                     </p>
                     <div className="mt-2 text-[10px] uppercase tracking-wide text-accent-light">
                       {thread.length} mesaj
@@ -301,7 +331,9 @@ export function AdminPanel() {
                 <div className="border-b border-border p-6">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
-                      <h2 className="text-lg font-semibold">{selectedInquiry.name}</h2>
+                      <h2 className="text-lg font-semibold">
+                        {selectedInquiry.name}
+                      </h2>
                       <a
                         href={`mailto:${selectedInquiry.email}`}
                         className="text-sm text-accent-light hover:underline"
@@ -309,8 +341,11 @@ export function AdminPanel() {
                         {selectedInquiry.email}
                       </a>
                     </div>
-                    <time className="text-xs text-muted">
-                      {new Date(selectedInquiry.createdAt).toLocaleString("tr-TR")}
+                    <time
+                      className="text-xs text-muted"
+                      dateTime={selectedInquiry.createdAt}
+                    >
+                      Teklif: {formatMessageDateTime(selectedInquiry.createdAt)}
                     </time>
                   </div>
 
@@ -336,6 +371,9 @@ export function AdminPanel() {
                 <div className="max-h-[420px] space-y-4 overflow-y-auto p-6">
                   {getThreadMessages(selectedInquiry).map((message) => {
                     const isOutbound = message.direction === "outbound";
+                    const isFromCustomer =
+                      message.direction === "initial" ||
+                      message.direction === "inbound";
 
                     return (
                       <div
@@ -346,17 +384,60 @@ export function AdminPanel() {
                           className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                             isOutbound
                               ? "bg-accent/15 text-foreground"
-                              : "bg-white/5 text-muted"
+                              : "bg-white/5 text-foreground"
                           }`}
                         >
-                          <div className="mb-1 flex items-center gap-2 text-[10px] uppercase tracking-wide">
-                            <span className={isOutbound ? "text-accent-light" : "text-muted"}>
+                          <div className="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-wide">
+                            <span
+                              className={
+                                isOutbound ? "text-accent-light" : "text-muted"
+                              }
+                            >
                               {directionLabel(message.direction)}
                             </span>
-                            <span className="text-muted">
-                              {new Date(message.createdAt).toLocaleString("tr-TR")}
-                            </span>
+                            <time
+                              className="normal-case text-muted"
+                              dateTime={message.createdAt}
+                            >
+                              {formatMessageDateTime(message.createdAt)}
+                            </time>
                           </div>
+
+                          {isFromCustomer && (
+                            <div className="mb-3 space-y-1 rounded-lg bg-black/20 px-3 py-2 text-xs">
+                              <div className="font-medium text-foreground">
+                                {selectedInquiry.name}
+                              </div>
+                              <div className="text-muted">
+                                {message.fromEmail}
+                              </div>
+                              {message.direction === "initial" &&
+                                selectedInquiry.company && (
+                                  <div className="text-muted">
+                                    🏢 {selectedInquiry.company}
+                                  </div>
+                                )}
+                              {message.direction === "initial" &&
+                                selectedInquiry.phone && (
+                                  <div className="text-muted">
+                                    📞 {selectedInquiry.phone}
+                                  </div>
+                                )}
+                              {message.direction === "initial" &&
+                                selectedInquiry.offerAmount && (
+                                  <div className="text-gold">
+                                    💰 {selectedInquiry.offerAmount}
+                                  </div>
+                                )}
+                            </div>
+                          )}
+
+                          {isOutbound && (
+                            <div className="mb-2 text-xs text-muted">
+                              info@paylater.ca → {selectedInquiry.email}
+                            </div>
+                          )}
+
                           <p className="whitespace-pre-wrap text-sm leading-relaxed">
                             {message.body}
                           </p>

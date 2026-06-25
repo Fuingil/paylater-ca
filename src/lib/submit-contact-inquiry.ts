@@ -86,7 +86,7 @@ export async function submitContactInquiry(
           create: {
             direction: "initial",
             body: data.message.trim(),
-            subject: "İlk teklif mesajı",
+            subject: "Initial inquiry",
             fromEmail: email,
             toEmail: "info@paylater.ca",
           },

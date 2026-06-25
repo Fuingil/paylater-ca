@@ -12,8 +12,8 @@ export function getReplyToAddress(inquiryId: string): string {
   return `replies+${inquiryId}@${getInboundDomain()}`;
 }
 
-export function getThreadSubject(name: string, inquiryId: string): string {
-  return `paylater.ca — Teklifiniz ${formatInquiryRef(inquiryId)}`;
+export function getThreadSubject(_name: string, inquiryId: string): string {
+  return `paylater.ca — Your inquiry ${formatInquiryRef(inquiryId)}`;
 }
 
 export function formatInquiryRef(inquiryId: string): string {

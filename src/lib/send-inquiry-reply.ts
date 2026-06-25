@@ -44,7 +44,7 @@ export async function sendInquiryReply({
     to: [inquiry.email],
     replyTo,
     subject,
-    text: trimmed,
+    text: `${trimmed}\n\n—\nReply to this email to continue the conversation.`,
     html: `
       <div style="font-family:system-ui,sans-serif;background:#030712;color:#f8fafc;padding:32px">
         <p style="margin:0 0 16px;color:#94a3b8;font-size:13px">paylater.ca</p>
@@ -52,7 +52,7 @@ export async function sendInquiryReply({
           <p style="margin:0;color:#f8fafc;font-size:15px;line-height:1.7;white-space:pre-wrap">${escapeHtml(trimmed)}</p>
         </div>
         <p style="margin-top:24px;font-size:12px;color:#64748b">
-          Bu e-postayı yanıtlayarak bizimle iletişime devam edebilirsiniz.
+          Reply to this email to continue the conversation.
         </p>
       </div>
     `,

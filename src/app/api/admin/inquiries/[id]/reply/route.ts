@@ -3,7 +3,10 @@ import { z } from "zod";
 
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { db } from "@/lib/db";
+import { normalizeInquiryMessages } from "@/lib/inquiry-messages";
 import { sendInquiryReply } from "@/lib/send-inquiry-reply";
+
+export const dynamic = "force-dynamic";
 
 const replySchema = z.object({
   message: z.string().min(2, "Mesaj en az 2 karakter olmalı"),
@@ -29,12 +32,21 @@ export async function POST(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: result.error }, { status: 400 });
     }
 
-    const messages = await db.inquiryMessage.findMany({
-      where: { inquiryId: id },
-      orderBy: { createdAt: "asc" },
+    const inquiry = await db.contactInquiry.findUnique({
+      where: { id },
+      include: {
+        messages: { orderBy: { createdAt: "asc" } },
+      },
     });
 
-    return NextResponse.json({ success: true, messages });
+    if (!inquiry) {
+      return NextResponse.json({ error: "Teklif bulunamadı" }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      success: true,
+      messages: normalizeInquiryMessages(inquiry),
+    });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
