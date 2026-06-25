@@ -82,6 +82,15 @@ export async function submitContactInquiry(
         message: data.message.trim(),
         ipAddress: input.ipAddress ?? null,
         userAgent: input.userAgent ?? null,
+        messages: {
+          create: {
+            direction: "initial",
+            body: data.message.trim(),
+            subject: "İlk teklif mesajı",
+            fromEmail: email,
+            toEmail: "info@paylater.ca",
+          },
+        },
       },
     });
 

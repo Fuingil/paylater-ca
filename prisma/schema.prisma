@@ -8,7 +8,7 @@ datasource db {
 }
 
 model ContactInquiry {
-  id          String   @id @default(cuid())
+  id          String           @id @default(cuid())
   name        String
   email       String
   company     String?
@@ -17,5 +17,21 @@ model ContactInquiry {
   message     String
   ipAddress   String?
   userAgent   String?
-  createdAt   DateTime @default(now())
+  createdAt   DateTime         @default(now())
+  messages    InquiryMessage[]
+}
+
+model InquiryMessage {
+  id        String         @id @default(cuid())
+  inquiryId String
+  inquiry   ContactInquiry @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+  direction String
+  body      String         @db.Text
+  subject   String?
+  fromEmail String
+  toEmail   String
+  resendId  String?        @unique
+  createdAt DateTime       @default(now())
+
+  @@index([inquiryId, createdAt])
 }

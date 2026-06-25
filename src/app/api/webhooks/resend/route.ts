@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import { processInboundEmail } from "@/lib/process-inbound-email";
+
 type ReceivedWebhook = {
   type: string;
   data?: {
@@ -18,8 +20,7 @@ function getResend() {
 }
 
 export async function POST(request: NextRequest) {
-  const notifyEmail = process.env.NOTIFY_EMAIL;
-  if (!process.env.RESEND_API_KEY || !notifyEmail) {
+  if (!process.env.RESEND_API_KEY) {
     return NextResponse.json({ error: "Not configured" }, { status: 503 });
   }
 
@@ -46,22 +47,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: true });
     }
 
-    const fromAddress =
-      process.env.RESEND_FROM_EMAIL ?? "paylater.ca <noreply@paylater.ca>";
+    const stored = await processInboundEmail(event.data.email_id);
 
-    const { error } = await resend.emails.receiving.forward({
-      emailId: event.data.email_id,
-      to: notifyEmail,
-      from: fromAddress,
-      passthrough: true,
-    });
+    const notifyEmail = process.env.NOTIFY_EMAIL;
+    if (!stored && notifyEmail) {
+      const fromAddress =
+        process.env.RESEND_FROM_EMAIL ?? "paylater.ca <noreply@paylater.ca>";
 
-    if (error) {
-      console.error("Inbound forward failed:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      await resend.emails.receiving.forward({
+        emailId: event.data.email_id,
+        to: notifyEmail,
+        from: fromAddress,
+        passthrough: true,
+      });
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, stored });
   } catch (error) {
     console.error("Resend webhook error:", error);
     return NextResponse.json({ error: "Webhook failed" }, { status: 400 });

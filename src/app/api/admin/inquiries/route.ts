@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { db } from "@/lib/db";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { db } from "@/lib/db";
 
 export async function GET(request: NextRequest) {
   if (!isAdminAuthenticated(request)) {
@@ -10,15 +10,10 @@ export async function GET(request: NextRequest) {
 
   const inquiries = await db.contactInquiry.findMany({
     orderBy: { createdAt: "desc" },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      company: true,
-      phone: true,
-      offerAmount: true,
-      message: true,
-      createdAt: true,
+    include: {
+      messages: {
+        orderBy: { createdAt: "asc" },
+      },
     },
   });
 
